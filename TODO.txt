@@ -1,0 +1,29 @@
+##IMPORTANT
+-comments...
+-Javadocs if neccesary
+-end screen not functioning properly--
+-highscores need displaying--
+-accuracy needs a dot--
+-pause is shit, can't be helped--
+-pause buttons/options--
+-overscrolling scrollbar--
+-m to menu--
+
+##MINOR
+-menu alignment--
+-text alignment--
+-combo alignment--
+-button hovers suck--
+im still mad
+
+##XTRA
+-pipidon--
+-drumroll/spinners, useless
+-splash screen--
+-hit fx--
+-combobreak sounds, nope
+-menu sounds, nope
+-combo fx --
+-touch support, not rly
+-rockband drums 3hard5me
+-fuck kiah tyme
