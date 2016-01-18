@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package osu;
 
 import jaco.mp3.player.MP3Player;
@@ -24,8 +19,10 @@ import java.util.logging.Logger;
 import javax.imageio.ImageIO;
 
 /**
- *
- * @author Jim
+ * The song objects used in the game.
+ * They contain the actual song mp3, the difficulties, beatmaps, and all data about the song
+ * @author Jim Zhu
+ * @author Yanjun Zhang
  */
 public class Song {
 

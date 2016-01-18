@@ -10,11 +10,15 @@ import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.imageio.ImageIO;
-
+/**
+ * The menu class handles all of the screen/state changes, bgm, and the user interface.
+ */
 public class Menu {
 
     private State state;
-
+    /**
+     * Various graphical elements.
+     */
     private Image menuBG;
     private Image menuOverlay;
     private Image scroll;
@@ -23,7 +27,9 @@ public class Menu {
     private Image[] upDown;
     private Image[] playButton;
     private Image songBox;
-
+    /**
+     * Various stylistic elements and data that needs to be displayed.
+     */
     private ArrayList<Song> songs;
     private Font myFont = new Font("Arial", Font.BOLD, 12);
     private int position = 0;
@@ -36,6 +42,12 @@ public class Menu {
     private boolean hd = false;
     private boolean fl = false;
 
+    /**
+     * The constructor imports all of the required images and data
+     * Initializes the variables 
+     * @param songs the list of songs/difficulties that need to be displayed
+     * @param state the state/screen the game is in
+     */
     public Menu(ArrayList<Song> songs, State state) {
         try {
             button = new Image[]{ImageIO.read(new File("Resources/General/buttons.png")),
@@ -61,24 +73,37 @@ public class Menu {
             Logger.getLogger(Menu.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
-
+    /**
+     * Gets the song that the user has selected
+     * @return returns the song that has been chosen
+     */
     public Song getSong() {
         return songs.get(position);
     }
-
+    /**
+     * Gets the current state of the game
+     * @return returns the state of the game
+     */
     public State getState() {
         return state;
     }
-
+    /**
+     * Changes the current state of the game
+     * @param state the state to be set to
+     */
     public void setState(State state) {
         this.state = state;
     }
-
+    /**
+     * Gets the difficulty that the user has selected
+     * @return returns the difficulty that has been chosen
+     */
     public int getDifficulty() {
         return diff;
     }
-
-    //For song list
+    /**
+     * Increments the position of the songs for an animated effect.
+     */
     public void addPos() {
         if (position == songs.size() - 1) {
             position = 0;
@@ -86,8 +111,9 @@ public class Menu {
             position++;
         }
     }
-
-    //For song list
+    /**
+     * Increments the position of the songs for an animated effect.
+     */
     public void subPos() {
         if (position == 0) {
             position = songs.size() - 1;
@@ -96,55 +122,88 @@ public class Menu {
         }
 
     }
-
+    /**
+     * Sets the state of a button to pressed when it is being pressed
+     * @param pressed the button that is being pressed
+     */
     public void setPressed(int pressed) {
         press[pressed] = true;
     }
-
+    /**
+     * Sets the state of a button to released when it is released
+     * @param released the button that is released
+     */
     public void setReleased(int released) {
         release[released] = true;
     }
-
+    /**
+     * Sets the state of a button to hovered when it is being hovered
+     * @param hovered the button that is being hovered
+     */
     public void setHover(int hovered) {
         hover[hovered] = true;
     }
-
+    /**
+     * Removes the pressed state from all buttons.
+     */
     public void clearPressed() {
         for (int j = 0; j < press.length; j++) {
             press[j] = false;
         }
     }
-
+    /**
+     * Removes the hovered state from all buttons.
+     */
     public void clearHover() {
         for (int j = 0; j < hover.length; j++) {
             hover[j] = false;
         }
     }
-
+    /**
+     * Starts the game once the user chooses to.
+     */
     public void startGame() {
-        for (int i = 0; i < songs.size(); i++) {
-            songs.get(i).stopSong();
+        for (Song song : songs) {
+            song.stopSong();
         }
         setState(State.GAME);
     }
-
+    /**
+     * Sets the difficulty to what the user has selected
+     * @param diff the difficulty that has been chosen
+     */
     public void setDiff(int diff) {
         this.diff = diff;
     }
-
+    /**
+     * Gets the mods(hidden or flashlight) that the user has selected
+     * @return returns the mods the user has selected 
+     */
     public boolean[] getMods() {
         return new boolean[]{hd, fl};
     }
-
+    /**
+     * Turns the mods on and off
+     * @param on the state to set the mod to
+     */
     public void setHD(boolean on) {
         hd = on;
     }
-
+    /**
+     * Turns the mods on and off
+     * @param on the state to set the mod to
+     */
     public void setFL(boolean on) {
         fl = on;
     }
 
-    //Draws song list
+    /**
+     * A helper method that draws each song and its data in a nifty little box
+     * @param g the instance of graphics where the contents are to be drawn
+     * @param position the position of the song in the list
+     * @param y the y location of the box
+     * @param x the x location of the box
+     */
     public void drawSongBox(Graphics g, int position, int x, int y) {
         g.drawImage(songBox, x - 20, y - 40, null);
         g.drawImage(songs.get(position).getIcon(), x + 335, y - 25, null);
@@ -156,8 +215,10 @@ public class Menu {
             g.drawString("Mode: Taiko", x + 230, y);
         }
     }
-
-    //Menu control animations
+   /**
+     * Updates the location of the objects once per tick
+     * Mostly used to animate the boxes moving
+     */
     public void tick() {
         if (first) {
             songs.get(position).playSong();
@@ -171,8 +232,8 @@ public class Menu {
         if (animationCounter >= 260) {
             release[1] = false;
             animationCounter = 130;
-            for (int i = 0; i < songs.size(); i++) {
-                songs.get(i).stopSong();
+            for (Song song : songs) {
+                song.stopSong();
             }
             subPos();
             diff = 0;
@@ -183,8 +244,8 @@ public class Menu {
         } else if (animationCounter <= 0) {
             release[0] = false;
             animationCounter = 130;
-            for (int i = 0; i < songs.size(); i++) {
-                songs.get(i).stopSong();
+            for (Song song : songs) {
+                song.stopSong();
             }
             addPos();
             diff = 0;
@@ -194,19 +255,21 @@ public class Menu {
             }
         }
     }
-
+    
     public void renderAll(Graphics g) {
         for (int i = 0; i < songs.size(); i++) {
             addPos();
             drawSongBox(g, position, i, i);
         }
     }
-
+    /**
+     * Draws all the stuff that needs to be drawn
+     * @param g the instance of graphics where the contents are to be drawn
+     */
     public void render(Graphics g) {
         g.setFont(myFont);
         //bg
         g.drawImage(songs.get(position).getBG(), 0, 0, null);
-        //g.drawImage(menuBG, 0, 0, null);
 
         //songboxes animation
         g.setColor(Color.white);
@@ -314,17 +377,23 @@ public class Menu {
             g.drawString(songs.get(position).getScores(diff).get(i), 75, 245 + 34 * i);
         }
     }
-
+    /**
+     * Rewinds the song
+     */
     public void reset() {
         loaded = false;
         songs.get(position).stopSong();
         songs.get(position).playSong();
     }
-    
+    /**
+     * Just a flag for the first opening of the game
+     */
     public void initialize() {
         loaded = true;
     }
-
+    /**
+     * Just a flag for the first opening of the game
+     */
     public boolean isInitialized() {
         return loaded;
     }

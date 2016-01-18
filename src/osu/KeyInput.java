@@ -3,18 +3,36 @@ package osu;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
 
+/**
+ * This class handles all of the keyboard inputs
+ *
+ */
 public class KeyInput extends KeyAdapter {
 
-    private Player player;
-    private Menu menu;
-    private Handler handler;
+    /**
+     * The objects that are affected by keyboard input
+     */
+    private final Player player;
+    private final Menu menu;
+    private final Handler handler;
 
+    /**
+     * The constructor for the simply initializes the variables
+     * @param player the player object being affected
+     * @param menu the menu object being affected
+     * @param handler the handler object being affected
+     */
     public KeyInput(Player player, Menu menu, Handler handler) {
         this.player = player;
         this.menu = menu;
         this.handler = handler;
     }
 
+    /**
+     * This method takes in the actual key-presses and assigns to their respective commands
+     * Overrides the keyPressed in the KeyAdapter class
+     * @param e the key press
+     */
     @Override
     public void keyPressed(KeyEvent e) {
         int key = e.getKeyCode();
@@ -62,7 +80,11 @@ public class KeyInput extends KeyAdapter {
             }
         }
     }
-
+    /**
+     * This method takes in the key releases and assigns to their respective commands
+     * Overrides the keyReleased in the KeyAdapter class
+     * @param e the key being released
+     */
     @Override
     public void keyReleased(KeyEvent e) {
         int key = e.getKeyCode();
