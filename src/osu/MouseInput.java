@@ -4,14 +4,23 @@ import java.awt.Rectangle;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseWheelEvent;
-
+    /**
+     * This class handles all of the mouse inputs
+     */
 public class MouseInput extends MouseAdapter {
 
-    private Menu menu;
-    private Pause pause;
-    private End end;
-    private Handler handler;
-
+    private final Menu menu;
+    private final Pause pause;
+    private final End end;
+    private final Handler handler;
+    /**
+     * The constructor takes in all of the classes that require some form of mouse input
+     * Most of the mouse input is needed for buttons
+     * @param menu the buttons of the menu need mouse input
+     * @param pause the buttons of the menu need mouse input
+     * @param end the buttons of the menu need mouse input
+     * @param handler the buttons of the menu need mouse input
+     */
     public MouseInput(Menu menu, Pause pause, End end, Handler handler) {
         this.menu = menu;
         this.pause = pause;
@@ -19,6 +28,10 @@ public class MouseInput extends MouseAdapter {
         this.handler = handler;
     }
 
+    /**
+     * Scrolling the mousewheel should scroll through the list of songs in the menu
+     * @param e The mouse wheel event
+     */
     @Override
     public void mouseWheelMoved(MouseWheelEvent e) {
         if (e.getWheelRotation() > 0) {
@@ -27,7 +40,10 @@ public class MouseInput extends MouseAdapter {
             menu.setReleased(1);
         }
     }
-
+    /**
+     * Releasing the mouse click is the event that actually triggers the buttons
+     * @param e The mouse release event
+     */
     @Override
     public void mouseReleased(MouseEvent e) {
         menu.clearPressed();
@@ -87,7 +103,11 @@ public class MouseInput extends MouseAdapter {
         }
     }
 
-    //selection options in menu, pause and end screen
+    /**
+     * Pressing down the mouse simply changes the button state to pressed.
+     * It does not actually trigger the button
+     * @param e The mouse pressed event
+     */
     @Override
     public void mousePressed(MouseEvent e) {
         menu.clearPressed();
@@ -127,7 +147,11 @@ public class MouseInput extends MouseAdapter {
         }
     }
 
-    //Hover animations
+    /**
+     * Checks the location of the cursor in order to check for hovers.
+     * This changes the button states to hover. 
+     * @param e The mouse moved event
+     */
     @Override
     public void mouseMoved(MouseEvent e) {
         menu.clearHover();

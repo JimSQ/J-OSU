@@ -3,8 +3,21 @@ package osu;
 import java.awt.Graphics;
 import java.awt.Rectangle;
 
+    /**
+     * The abstract class notes.
+     * All notes in the game are of this type.
+     * They all share common properties such as position, timing, speed, and state.
+     */
 public abstract class Notes {
-
+    /**
+     * x and y are the coordinates of the note
+     * START_TIME is the time in the song when the note is supposed to appear
+     * kill and hit are different states the note can be in.
+     * kill occurs when either the note reaches the bottom of the field, it is no longer used
+     * hit occurs if the player actually hits the note
+     * frames is the number of updates the note takes to travel once
+     * TICK_DISTANCE is the distance the note travels
+     */
     protected int x;
     protected int y;
     protected final int START_TIME;

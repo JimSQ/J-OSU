@@ -387,12 +387,14 @@ public class Menu {
     }
     /**
      * Just a flag for the first opening of the game
+     * Turns true once the game opens for the first time
      */
     public void initialize() {
         loaded = true;
     }
     /**
      * Just a flag for the first opening of the game
+     * @return returns true if it is not the first opening
      */
     public boolean isInitialized() {
         return loaded;
